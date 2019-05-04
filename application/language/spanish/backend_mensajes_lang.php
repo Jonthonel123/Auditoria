@@ -1,0 +1,43 @@
+<?php
+
+$lang['mensaje_banner_agregado'] = 'Banner agregado correctamente';
+$lang['mensaje_banner_editado'] = 'Banner editado correctamente';
+$lang['mensaje_beneficio_agregado'] = 'Beneficio agregado correctamente';
+$lang['mensaje_beneficio_editado'] = 'Beneficio editado correctamente';
+$lang['mensaje_carta_agregado'] = 'Carta agregado correctamente';
+$lang['mensaje_carta_editado'] = 'Carta editado correctamente';
+$lang['mensaje_categoria_agregado'] = 'Categoria agregado correctamente';
+$lang['mensaje_categoria_editado'] = 'Categoria editado correctamente';
+$lang['mensaje_contacto_agregado'] = 'Contacto agregado correctamente';
+$lang['mensaje_contacto_editado'] = 'Contacto editado correctamente';
+$lang['mensaje_empresa_agregado'] = 'Empresa agregado correctamente';
+$lang['mensaje_empresa_editado'] = 'Empresa editado correctamente';
+$lang['mensaje_formula_agregado'] = 'Formula agregado correctamente';
+$lang['mensaje_formula_editado'] = 'Formula editado correctamente';
+$lang['mensaje_foto_agregado'] = 'Foto agregado correctamente';
+$lang['mensaje_foto_editado'] = 'Foto editado correctamente';
+$lang['mensaje_informacion_adicional_agregado'] = 'Infomación Adicional agregado correctamente';
+$lang['mensaje_informacion_adicional_editado'] = 'Infomación Adicional editado correctamente';
+$lang['mensaje_local_agregado'] = 'Local agregado correctamente';
+$lang['mensaje_local_editado'] = 'Local editado correctamente';
+$lang['mensaje_promocion_agregado'] = 'Promoción agregado correctamente';
+$lang['mensaje_promocion_editado'] = 'Promoción editado correctamente';
+$lang['mensaje_portada_agregado'] = 'Portada agregada correctamente';
+$lang['mensaje_portada_editado'] = 'Portada editada correctamente';
+$lang['mensaje_usuario_agregado'] = 'Usuario agregado correctamente';
+$lang['mensaje_usuario_editado'] = 'Usuario editado correctamente';
+$lang['mensaje_beneficio_carga_masiva'] = 'Beneficios agregados correctamente';
+$lang['mensaje_promocion_carga_masiva'] = 'Promociones agregados correctamente';
+$lang['mensaje_carga_fotos'] = 'Fotos subidas correctamente';
+$lang['mensaje_logueo'] = 'Ingresando. . .';
+$lang['mensaje_local_ubicacion_agregado'] = 'Ubicación del local agregados correctamente';
+$lang['mensaje_local_ubicacion_editado'] = 'Ubicación del local editado correctamente';
+$lang['mensaje_local_horario_agregado'] = 'Horario del local agregados correctamente';
+$lang['mensaje_local_horario_editado'] = 'Horario del local editado correctamente';
+$lang['mensaje_carta_carga_masiva'] = 'Cartas agregados correctamente';
+$lang['mensaje_informacion_adicional_eliminado'] = 'Se elimino de manera correctamente';
+$lang['mensaje_foto_eliminado'] = 'Se elimino de manera correctamente';
+$lang['mensaje_local_promocion_eliminado'] = 'Se quito de manera correctamente';
+
+$lang['mensaje_establecimiento_agregado'] = 'Establecimiento agregado correctamente';
+$lang['mensaje_establecimiento_editado'] = 'Establecimiento editado correctamente';

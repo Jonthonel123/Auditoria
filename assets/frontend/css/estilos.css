@@ -1,0 +1,401 @@
+/* menu de navegacion */
+
+ .navbar-dark .navbar-nav .nav-link{
+     color: #fff;
+}
+ .navbar-dark .navbar-nav .nav-link:hover, .navbar-dark .navbar-nav .nav-link:focus {
+     color: #33b5e5;
+     
+}
+
+
+
+.menu-navegacion{
+ 
+  box-shadow: 0px 2px 10px #000;
+}
+
+
+
+
+.text-carrusel{
+
+  margin-bottom: 200px;
+}
+
+.h3-responsive{
+
+  font-size: 5em;
+  text-shadow: 2px 2px 4px #000;
+}
+
+.intro-text{
+  font-size: 16px;
+  letter-spacing: 4px;
+  text-shadow: 2px 2px 4px #000;
+}
+
+
+
+
+/*seccion nosotros*/
+
+.nosotros{
+     padding: 80px 0px;
+}
+
+.nosotros .linea{
+    border: 2px solid #33b5e5;
+    width: 50px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.foto-equipo img{
+    width: 100%;
+    max-width:360px;
+    height: 360px;
+}
+
+ .foto-equipo{
+     -webkit-filter: grayscale(100%);
+    /* Efecto Blanco y negro*/
+    /* border-radius: 2px;
+    /* Peque���o borde en las imagenes*/
+     -webkit-transition: all 0.5s ease;
+    /* Efecto suavizado para diferentes navegadores*/
+     -moz-transition: all 0.5s ease;
+     -o-transition: all 0.5s ease;
+     -ms-transition: all 0.5s ease;
+     transition: all 0.5s ease;
+    /* Fin del Efecto suavizado para diferentes navegadores*/
+}
+ .foto-equipo:hover {
+     -webkit-filter: grayscale(0%);
+    /* Quita el efecto Blanco y Negro*/
+    /* -webkit-transform: rotate(360deg);
+    /* Giro que da antes de transformase en circulo para varios navegadores*/
+    /* -moz-transform: rotate(360deg);
+     -o-transform: rotate(360deg);
+     -ms-transform: rotate(360deg);
+    /* transform: rotate(360deg);
+    /* Fin del Giro para diferentes navegadores*/
+}
+
+
+
+/* Galeria */
+
+ .gallery {
+     max-width: 1100px;
+     margin:0 auto;
+}
+
+ .gallery .pics {
+     -webkit-transition: all 350ms ease;
+     transition: all 350ms ease;
+}
+
+ .gallery .animation {
+     -webkit-transform: scale(1);
+     -ms-transform: scale(1);
+     transform: scale(1);
+}
+
+ .btntabimg{
+     margin-right: 5px;
+     box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
+     font-size: .81rem;
+     padding: .84rem 2.14rem;
+}
+ .btntabvideo{
+     font-size: .81rem;
+     margin-left: 5px;
+     padding: .84rem 2.14rem;
+     box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
+}
+ .btntabimg:hover{
+     -webkit-box-shadow: 0 5px 11px 0 rgba(0, 0, 0, .18), 0 4px 15px 0 rgba(0, 0, 0, .15);
+     box-shadow: 0 5px 11px 0 rgba(0, 0, 0, .18), 0 4px 15px 0 rgba(0, 0, 0, .15);
+     outline: 0;
+}
+ .btntabvideo:hover{
+     -webkit-box-shadow: 0 5px 11px 0 rgba(0, 0, 0, .18), 0 4px 15px 0 rgba(0, 0, 0, .15);
+     box-shadow: 0 5px 11px 0 rgba(0, 0, 0, .18), 0 4px 15px 0 rgba(0, 0, 0, .15);
+     outline: 0;
+}
+ @media (max-width: 450px) {
+     .gallery {
+         -webkit-column-count: 1;
+         -moz-column-count: 1;
+         column-count: 1;
+         -webkit-column-width: 100%;
+         -moz-column-width: 100%;
+         column-width: 100%;
+    }
+}
+ @media (max-width: 400px) {
+     .btn.filter {
+         padding-left: 1.1rem;
+         padding-right: 1.1rem;
+    }
+}
+/* .w-100 {
+     height: 650px;
+     background-position: center;
+     background-size: cover;
+     background: rgba(0, 0, 0, 0.47);
+}
+ @media all and (min-width: 767px) {
+     .w-100 {
+         height: 625px;
+         background-position: center;
+         background-size: cover;
+    } 
+}
+ */
+ /* Media queries */
+ @media (max-width: 767px) {
+     .equipo-img {
+         margin-bottom: 65px;
+    }
+     .foto-equipo img {
+         height: 225px;
+         width: 100%;
+         background-image: center;
+    }
+     .nosotros h2{
+         text-align: center;
+         margin-bottom: 15px;
+    }
+     .nosotros .linea{
+         margin: 0 auto;
+    }
+     .nosotros p{
+         margin-top: 15px;
+         text-align: center;
+    }
+     .leer{
+         text-align: center;
+    }
+     .gallery {
+         max-width: 350px;
+         margin:0 auto;
+    }
+}
+ .row-contact {
+     margin: -20px 0;
+}
+ .row-contact:after {
+     content: "";
+     display: table;
+     clear: both;
+}
+ .row-contact .col {
+     padding: 0 20px;
+     float: left;
+     box-sizing: border-box;
+}
+ .content-wrapper {
+     min-height: 100%;
+     position: relative;
+}
+ .contactanos {
+     max-width: 650px;
+     height: 420px;
+     margin: 0 auto;
+}
+ .contactanos .title {
+     text-align: center;
+     padding-top: 48px;
+     padding-bottom: 48px;
+}
+ .contact-form .form-field {
+     position: relative;
+     margin: 32px 0;
+}
+ .contact-form .input-text {
+     width: 100%;
+     height: 36px;
+     border-width: 0 0 2px 0;
+     border-color: #333;
+     background: #f8f9fa;
+     font-size: 18px;
+     line-height: 26px;
+     font-weight: 400;
+}
+/*borrar borde sombreado de input */
+ .contact-form .input-text:focus {
+     outline: none;
+}
+ .contact-form .input-text:focus + .label, .contact-form .input-text.not-empty + .label {
+     -webkit-transform: translateY(-24px);
+     transform: translateY(-24px);
+}
+ .contact-form .label {
+     position: absolute;
+     left: 20px;
+     bottom: 11px;
+     font-size: 16px;
+     line-height: 45px;
+     font-weight: 400;
+     color: #888;
+     transition: -webkit-transform 0.2s ease-in-out;
+     transition: transform 0.2s ease-in-out;
+     transition: transform 0.2s ease-in-out, -webkit-transform 0.2s ease-in-out;
+}
+ .icon-social {
+     display: flex;
+     flex-flow: row wrap;
+}
+ .icon-social a {
+     margin-left: 20px;
+}
+ .icon-social p {
+     display: none;
+}
+ .contact-form .submit-btn {
+     border-radius: 10rem;
+     padding: 10px 25px;
+}
+/* footer */
+ .top-footer {
+     background:rgba(52, 58, 64, 1);
+     height: 25px;
+}
+ .center-footer{
+     font-size: 14px;
+}
+ .center-footer .widget{
+     max-width: 250px;
+     margin: 0 auto;
+}
+ .widget h5{
+     padding-bottom: 25px;
+}
+ .bottom-footer{
+     background:rgba(52, 58, 64, 1);
+     height: auto;
+     color: #fff;
+}
+/* boton-subir */
+ .boton-subir{
+     position: fixed;
+     background: rgba(51,181,229,.6);
+     height: 40px;
+     width: 40px;
+     bottom: 40px;
+     right: 30px;
+     text-align: center;
+     line-height: 50px;
+     border:none;
+     margin-bottom: 70px;
+}
+ .boton-subir i {
+     color: #fff;
+     font-size: 1.5em;
+    /* transform: rotate(-45deg);
+     */
+}
+ a.boton-subir:hover{
+     box-shadow: 0px 2px 10px 0px rgba(255, 255, 255, 0.75);
+}
+ .boton-whatsapp{
+     position: fixed;
+     background: rgba(255,255,255,.0);
+     bottom: 40px;
+     right: 20px;
+     text-align: center;
+     line-height: 50px;
+     border:none;
+}
+/* carrusel logos */
+ .slick-slide {
+     margin: 0px 20px;
+}
+ .slick-slide img {
+     width: 100%;
+}
+ .slick-slider {
+     position: relative;
+     display: block;
+     box-sizing: border-box;
+     -webkit-user-select: none;
+     -moz-user-select: none;
+     -ms-user-select: none;
+     user-select: none;
+     -webkit-touch-callout: none;
+     -khtml-user-select: none;
+     -ms-touch-action: pan-y;
+     touch-action: pan-y;
+     -webkit-tap-highlight-color: transparent;
+}
+ .slick-list {
+     position: relative;
+     display: block;
+     overflow: hidden;
+     margin: 0;
+     padding: 0;
+}
+ .slick-list:focus {
+     outline: none;
+}
+ .slick-list.dragging {
+     cursor: pointer;
+     cursor: hand;
+}
+ .slick-slider .slick-track, .slick-slider .slick-list {
+     -webkit-transform: translate3d(0, 0, 0);
+     -moz-transform: translate3d(0, 0, 0);
+     -ms-transform: translate3d(0, 0, 0);
+     -o-transform: translate3d(0, 0, 0);
+     transform: translate3d(0, 0, 0);
+}
+ .slick-track {
+     position: relative;
+     top: 0;
+     left: 0;
+     display: block;
+}
+ .slick-track:before, .slick-track:after {
+     display: table;
+     content: '';
+}
+ .slick-track:after {
+     clear: both;
+}
+ .slick-loading .slick-track {
+     visibility: hidden;
+}
+ .slick-slide {
+     display: none;
+     float: left;
+     height: 100%;
+     min-height: 1px;
+}
+ [dir='rtl'] .slick-slide {
+     float: right;
+}
+ .slick-slide img {
+     display: block;
+}
+ .slick-slide.slick-loading img {
+     display: none;
+}
+ .slick-slide.dragging img {
+     pointer-events: none;
+}
+ .slick-initialized .slick-slide {
+     display: block;
+}
+ .slick-loading .slick-slide {
+     visibility: hidden;
+}
+ .slick-vertical .slick-slide {
+     display: block;
+     height: auto;
+     border: 1px solid transparent;
+}
+ .slick-arrow.slick-hidden {
+     display: none;
+}
