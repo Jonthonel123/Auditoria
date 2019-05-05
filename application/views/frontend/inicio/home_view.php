@@ -18,7 +18,7 @@
                   <p class="intro-text">!UN BALANCE AUDITADO, ES UN BALANCE FIABLE!</p>
                 </div>
               </div>
- 
+
 
            </div>
            <div class="carousel-item">
@@ -50,7 +50,7 @@
 
            <div class="col-md-6  equipo-img d-flex justify-content-center">
                <div class="shadow  foto-equipo " data-aos="zoom-in" data-aos-duration="2000">
-                   <img  src="<?php echo base_url('assets/frontend/images/foto-equipo3.jpg');?>" alt="foto-equipo" />
+                   <img  src="<?php echo base_url('assets/frontend/images/foto-equipo.jpg');?>" alt="foto-equipo" />
                </div>
            </div>
 
@@ -68,7 +68,8 @@
                </p>
 
                <div class="leer">
-                   <a href="#" class="btn btn-outline-info shadow-sm">Más información</a>
+                   <a href="#" class="btn btn-outline-info shadow-sm" data-aos="fade-up"
+                        data-aos-duration="2000">Más información</a>
                </div>
            </div>
        </div>
@@ -85,7 +86,7 @@
                <h2 class="text-center" data-aos="fade-up"
                     data-aos-duration="2000">GALERIA</h2>
                <p class="page-description text-center" data-aos="fade-up"
-                    data-aos-duration="2000">Nuestras imagenes</p>
+                    data-aos-duration="2000" >Nuestras imagenes</p>
            </div>
        </div>
 
@@ -100,13 +101,13 @@
                    <li>
                        <a class="" href="#tabs-1 ">
                            <button type="button" class="btntabimg btn btn-outline-dark btn-sm " data-aos="fade-up"
-                                data-aos-duration="2000" name="button">Imagenes</button>
+                                data-aos-duration="2000" name="button" style="font-weight:bold">Imagenes</button>
                        </a>
                    </li>
                    <li>
                        <a class="" href="#tabs-2">
                            <button type="button" class="btntabvideo btn btn-outline-dark btn-sm "  data-aos="fade-up"
-                                data-aos-duration="2000" name="button">Videos</button>
+                                data-aos-duration="2000" name="button" style="font-weight:bold">Videos</button>
                        </a>
                    </li>
 
@@ -115,14 +116,19 @@
            </div>
        </div>
 
+<div class="container">
+
        <div id="tabs-1" >
+
            <div class="gallery tz-gallery">
                <div class="mdb-lightbox ">
                    <div class="row">
                        <div class="col-md-4">
 
-                           <figure class="shadow " data-aos="fade-up"
-                                data-aos-duration="2000">
+                           <figure class="shadow " data-aos="fade-right"
+     data-aos-offset="300"
+     data-aos-easing="ease-in-sine" data-aos-duration="2000"
+                                >
                                <a class="" href="<?php echo base_url('assets/frontend/images/portfolio/1.jpg');?>">
           <img alt="picture" src="<?php echo base_url('assets/frontend/images/portfolio/1.jpg');?>"
             class="img-fluid">
@@ -141,8 +147,9 @@
                        </div>
 
                        <div class="col-md-4">
-                           <figure class="shadow" data-aos="fade-up"
-                                data-aos-duration="2000">
+                           <figure class="shadow" data-aos="fade-left"
+     data-aos-offset="300"
+     data-aos-easing="ease-in-sine" data-aos-duration="2000">
                                <a href="<?php echo base_url('assets/frontend/images/portfolio/3.jpg');?>">
             <img alt="picture" src="<?php echo base_url('assets/frontend/images/portfolio/3.jpg');?>"
               class="img-fluid" />
@@ -178,7 +185,7 @@
            </div>
        </div>
        </div>
-
+</div>
 </section>
 
 <div class="container-fluid contacto  bg-light" >
@@ -210,7 +217,7 @@
 
            <div class="row  ">
                <div class="col-md-12 col-sm-12  col-xs-12 d-flex justify-content-center">
-                   <button type="button" class="btn btn-primary submit-btn btnEnviar">Enviar Mensaje </button>
+                   <button type="button" class="btn btn-primary submit-btn btnEnviar">ENVIAR MENSAJE </button>
                </div>
            </div>
 </div>

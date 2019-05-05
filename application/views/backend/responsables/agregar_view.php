@@ -6,7 +6,7 @@
     <div class="container-fluid">
         <div class="col-md-12 panel-body">
             <div class="block" style="background-color:#EEEEEE;margin-bottom: 0px;padding-bottom:20px;">
-                <form action="<?php echo site_url($this->config->item('path_backend').'/Area/agregar');?>" id="agregar_beneficio" class="form-horizontal" role="form" name="agregar_beneficio" method="post"
+                <form action="<?php echo site_url($this->config->item('path_backend').'/Responsable/agregar');?>" id="agregar_beneficio" class="form-horizontal" role="form" name="agregar_beneficio" method="post"
                       enctype="multipart/form-data" action="">
 
 
@@ -18,27 +18,19 @@
                         </div>
                     </div>
 
-
-
-
                     <div class="form-group">
-                        <label class="col-md-2 control-label">Responsable Area</label>
+                        <label class="col-md-2 control-label">Apellido</label>
                         <div class="col-md-10">
-                            <select class="form-control select" name="id_persona" id="id_persona" required  >
-                                <option value="">Seleccione</option>
-                                <?php foreach ($responsables as $responsable) { ?>
-                                    <option value="<?php echo $responsable->id;?>">
-                                        <?php echo $responsable->nombre; ?>
-                                    </option>
-                                <?php } ?>
-
-                            </select>
+                            <input type="text" maxlength="255" class="form-control" value="" name="apellido"  id="apellido" required/>
                         </div>
                     </div>
 
-
-
-
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Email</label>
+                        <div class="col-md-10">
+                            <input type="email" maxlength="255" class="form-control" value="" name="email"  id="email" required/>
+                        </div>
+                    </div>
 
                     <div class="form-group">
                         <label class="col-md-2 control-label">Estado</label>
@@ -69,23 +61,6 @@
 
 <script type="text/javascript">
 
-
-        function placeMarker(location) {
-            var marker = new google.maps.Marker({
-                position: location,
-                map: map
-            });
-
-            $('#latitud').val(marker.getPosition().lat());
-            $('#longitud').val(marker.getPosition().lng());
-
-            markes.push(marker);
-        }
-
-
-    $(".spinner_default").spinner();
-    $("#div_delivery").hide();
-    $("#div_some_locals").hide();
 
 
    var jvalidate = $("#agregar_beneficio").validate({

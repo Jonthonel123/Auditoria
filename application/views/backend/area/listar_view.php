@@ -22,8 +22,8 @@
                                 <label class="control-label">Estado</label>
                                 <select class="form-control select" name="estado" id="estado">
                                     <option value="">Seleccione</option>
-                                    <option value="0" <?php if ($estado == "1") echo "selected"; ?>>Activo</option>
-                                    <option value="1" <?php if ($estado == "2") echo "selected"; ?>>Inactivo</option>
+                                    <option value="1" <?php if ($estado == "1") echo "selected"; ?>>Activo</option>
+                                    <option value="0" <?php if ($estado == "0") echo "selected"; ?>>Inactivo</option>
                                 </select>
                             </div>
 
@@ -61,7 +61,8 @@
                     <td colspan="4" align="center" valign="top"></td>
                 </tr>
                 <tr>
-                    <th>Nombre</th>
+                    <th>Area</th>
+                    <th>Responsable</th>
                     <th>Estado</th>
                     <th>Acciones</th>
                 </tr>
@@ -77,6 +78,7 @@
                         ?>
                         <tr>
                             <td><?php echo $item->nombre; ?></td>
+                            <td><?php echo $item->responsable; ?></td>
 
                             <td style="text-align:center;">
                                 <?php

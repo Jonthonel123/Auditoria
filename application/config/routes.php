@@ -94,6 +94,16 @@ $route[$this->config->item('path_backend') . '/informes/export'] = "backend/Info
 
 
 
+#responsables
+
+$route[$this->config->item('path_backend') . '/responsables'] = "backend/Responsable/listar";
+$route[$this->config->item('path_backend') . '/responsables/(:num)'] = "backend/Responsable/listar/$1";
+$route[$this->config->item('path_backend') . '/responsables/buscar'] = "backend/Responsable/buscar";
+$route[$this->config->item('path_backend') . '/responsables/buscar/(:num)'] = "backend/Responsable/buscar/$1";
+$route[$this->config->item('path_backend') . '/responsables/eliminar/(:num)'] = "backend/Responsable/eliminar/$1";
+$route[$this->config->item('path_backend') . '/responsables/send/(:num)'] = "backend/Responsable/send/$1";
+$route[$this->config->item('path_backend') . '/responsables/export'] = "backend/Responsable/export";
+
 
 #login
 $route[$this->config->item('path_backend') . '/login'] = "backend/inicio/login";

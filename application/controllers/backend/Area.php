@@ -15,15 +15,22 @@ class Area extends MY_Controller
     {
         parent::__construct();
         $this->load->model("Area_model");
+        $this->load->model("Persona_model");
     }
 
     public function listar($start = 0)
     {
 
         if ($this->session->userdata('logged_in') === TRUE) {
-            $params = array(
-                "select" => "*",
-            );
+
+          $params = array(
+              "select" => "tbl_area.nombre,tbl_area.id_persona,tbl_persona.nombre as responsable,
+               tbl_area.estado",
+              "join" => array('tbl_persona,tbl_area.id_persona = tbl_persona.id')
+          );
+
+
+
             $total_areas = $this->Area_model->total_records($params);
 
             $areas = $this->Area_model->search_data($params, $start, $this->elementoPorPagina);
@@ -57,9 +64,9 @@ class Area extends MY_Controller
             if ($nombre != "" ) {
                 $this->arrayVista['nombre'] = $nombre;
                 if ($where != "") {
-                    $where .= " AND nombre LIKE '%" . $nombre . "%' ";
+                    $where .= " AND tbl_area.nombre LIKE '%" . $nombre . "%' ";
                 } else {
-                    $where = "nombre LIKE '%" . $nombre . "%' ";
+                    $where = "tbl_area.nombre LIKE '%" . $nombre . "%' ";
                 }
             }
 
@@ -82,9 +89,10 @@ class Area extends MY_Controller
                 );
             } else {
                 $params = array(
-                    "select" => "*",
-                    "where" => $where,
-                    "order" => "id desc"
+                    "select" => "tbl_area.nombre,tbl_area.id_persona,tbl_persona.nombre as responsable,
+                     tbl_area.estado",
+                    "join" => array('tbl_persona,tbl_area.id_persona = tbl_persona.id'),
+                    "where" => $where
                 );
             }
 
@@ -112,12 +120,13 @@ class Area extends MY_Controller
         if ($this->session->userdata('logged_in') === TRUE) {
 
             if ($this->input->post()) {
-
+                $id_responsable = $this->input->post("id_persona");
                 $nombre = $this->input->post("nombre");
                 $estado = $this->input->post("estado");
 
 
                 $data = array(
+                    'id_persona' => $id_responsable,
                     'nombre' => $nombre,
                     'estado' => $estado
                 );
@@ -136,11 +145,20 @@ class Area extends MY_Controller
 
             }
 
+
+
+           $responsables = array(
+                            "select" => "*", "where" => "estado = 1"
+                          );
+
+          $responsables = $this->Persona_model->search($responsables);
+
             $arrayMigaPan = array(
                 array("nombre" => "Area", "url" => site_url($this->config->item('path_backend') . '/inicio')), array("nombre" => "Agregar", 'active' => true));
 
             $this->arrayVista['arrayMigaPan'] = $arrayMigaPan;
             $this->arrayVista['tituloPagina'] = "Agregar Area";
+            $this->arrayVista['responsables'] = $responsables;
             $this->arrayVista['vista'] = 'backend/area/agregar_view';
             $this->cargarVistaBackend();
 
@@ -177,6 +195,9 @@ class Area extends MY_Controller
                 "select" => "*",
                 "where" => "id = '" . $id_area . "'"
             );
+
+
+
 
             $area = $this->Area_model->get_search_row($data);
             $arrayMigaPan = array(

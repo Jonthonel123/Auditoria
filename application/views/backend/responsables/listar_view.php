@@ -7,25 +7,44 @@
 
                     <form name="form_busqueda" id="form_busqueda" method="post"
                           action="<?php
-                          echo site_url($this->config->item('path_backend') . '/Asistencia/buscar');
+                          echo site_url($this->config->item('path_backend') . '/Responsable/buscar');
                           ?>">
 
                         <div class="col-md-12 form-group">
 
                             <div class="col-md-6">
-                                <label class="control-label"> Nombre</label>
+                                <label class="control-label">Nombre</label>
                                 <input id="nombre" maxlength="255" class="form-control input" type="text" name="nombre"
                                        placeholder="Nombre" value="<?php echo $nombre; ?>" class="input-small"/>
                             </div>
 
-                            <!-- <div class="col-md-6">
-                                <label class="control-label">Tipo</label>
-                                <select class="form-control select" name="tipo" id="tipo">
+                            <div class="col-md-6">
+                                <label class="control-label">Apellido</label>
+                                <input id="apellido" maxlength="255" class="form-control input" type="text" name="apellido"
+                                       placeholder="Apellido" value="<?php echo $apellido; ?>" class="input-small"/>
+                            </div>
+
+                          </div>
+
+
+                          <div class="col-md-12 form-group">
+
+                            <div class="col-md-6">
+                                <label class="control-label">Email</label>
+                                <input id="email" maxlength="255" class="form-control input" type="text" name="email"
+                                       placeholder="Email" value="<?php echo $email; ?>" class="input-small"/>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="control-label">Estado</label>
+                                <select class="form-control select" name="estado" id="estado">
                                     <option value="">Seleccione</option>
-                                    <option value="1" <?php if ($tipoSeleccionado == "1") echo "selected"; ?>>Escolar</option>
-                                    <option value="2" <?php if ($tipoSeleccionado == "2") echo "selected"; ?>>Oficina</option>
+                                    <option value="1" <?php if ($estado == "1") echo "selected"; ?>>Activo</option>
+                                    <option value="0" <?php if ($estado == "0") echo "selected"; ?>>Inactivo</option>
                                 </select>
-                            </div> -->
+                            </div>
+
+
 
                         </div>
 
@@ -50,9 +69,7 @@
     <div class="panel panel-default" style="border-top-color: #DAD4D4 ; border-top-width : 2px">
         <div class="panel-heading">
             <h3 class="panel-title">Listado</h3>
-            <a id="export_beneficio" class="btn btn-danger dropdown-toggle pull-right" style="margin-left: 5px;">
-              <img src="<?php echo base_url('assets/backend/'); ?>/img/icons/xls.png" width="16"/> Exportar</a>
-            <a href="<?php echo site_url($this->config->item('path_backend') . '/Asistencia/agregar'); ?>"
+            <a href="<?php echo site_url($this->config->item('path_backend') . '/Responsable/agregar'); ?>"
                  class="btn btn-default pull-right"><i class="fa fa-plus"></i> Agregar</a>
 
         </div>
@@ -63,42 +80,36 @@
                     <td colspan="4" align="center" valign="top"></td>
                 </tr>
                 <tr>
-                    <th>Nombres</th>
-                    <th>Asistios</th>
-                    <th>NoAsitio</th>
-                    <th>Justifico</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Email</th>
+                    <th>Estado</th>
                     <th>Acciones</th>
                 </tr>
                 </thead>
                 <tbody>
 
                 <?php
-                if (isset($asistencias) && count($asistencias) > 0)
+                if (isset($responsables) && count($responsables) > 0)
                 {
 
-                    foreach ($asistencias as $asistencia)
+                    foreach ($responsables as $item)
                     {
                         ?>
                         <tr>
-                          <td><?php echo $asistencia->idalumno; ?></td>
+                            <td><?php echo $item->nombre; ?></td>
+                            <td><?php echo $item->apellido; ?></td>
+                            <td><?php echo $item->email; ?></td>
 
                             <td style="text-align:center;">
                                 <?php
-                                if ($asistencia->asistio == 1) echo '<span class="label label-success label-form" style="width:70px; font-weight:bolder;">Asistio</span>'; else
-                                    echo '<span class="label label-danger label-form" style="width:70px; font-weight:bolder;">No existe</span>'
-                                ?>
-                            </td>
-                            <td style="text-align:center;">
-                                <?php
-                                if ($asistencia->noasistio == 2) echo '<span class="label label-success label-form" style="width:70px; font-weight:bolder;">noActivo</span>'; else
+                                if ($item->estado == 1) echo '<span class="label label-success label-form" style="width:70px; font-weight:bolder;">Activo</span>'; else
                                     echo '<span class="label label-danger label-form" style="width:70px; font-weight:bolder;">Inactivo</span>'
                                 ?>
                             </td>
 
-                              <td><?php echo $asistencia->justificacion; ?></td>
-
                             <td>
-                              <a href="<?php echo site_url($this->config->item('path_backend') . '/Asistencia/editar/' . $item->id); ?>"
+                              <a href="<?php echo site_url($this->config->item('path_backend') . '/Responsable/editar/' . $item->id); ?>"
                                  class="btn btn-info btn-condensed" title="Editar"><i class="fa fa-edit"></i></a>
                             </td>
 
@@ -131,16 +142,6 @@
     });
 
 
-    $('#export_beneficio').click(function (e) {
-        e.preventDefault();
-
-        var url = "<?php echo site_url($this->config->item('path_backend') . '/Categoria/export');?>";
-        var nombre = $("#nombre").val();
-        var tipo = $("#tipo").val();
-
-        window.location.href = url + "?nombre=" + nombre + "&tipo=" + tipo;
-
-    });
 
 
     $("#fecha_inicio").datetimepicker({
