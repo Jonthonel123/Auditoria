@@ -6,7 +6,7 @@
  * Time: 02:09 PM
  */
 defined('BASEPATH') or exit('No direct script access allowed');
-
+require APPPATH . '/libraries/PHPMailer.php';
 class Informe extends MY_Controller
 {
 
@@ -16,17 +16,27 @@ class Informe extends MY_Controller
         // $this->load->model("Categoria_model");
         $this->load->model("Area_model");
         $this->load->model("Informe_model");
+        $this->load->model("Persona_model");
+        $this->load->model("Area_responsable_model");
+        $this->lang->load('backend_error_lang', 'spanish');
     }
     public function listar($start = 0)
     {
 
 
         if ($this->session->userdata('logged_in') === TRUE) {
+
+
             $params = array(
-                "select" => "tbl_area.nombre,tbl_informe.id_area,tbl_informe.documento,tbl_informe.fecha,tbl_informe.hora,tbl_informe.lugar,tbl_informe.conformidad,tbl_informe.criterios,tbl_informe.descripcion,
-                tbl_informe.estado",
-                "join" => array('tbl_area,tbl_informe.id_area = tbl_area.id')
+                "select" => " tbl_informe.id,tbl_informe.nombre as nombreinforme,tbl_area.nombre as area,tbl_persona.nombre as nombrepersona,tbl_persona.email,tbl_informe.documento,tbl_informe.estado",
+                "join" => array(
+                    'tbl_area_persona,tbl_area_persona.id = tbl_informe.id_area_persona',
+                    'tbl_area, tbl_area.id = tbl_area_persona.id_area',
+                    'tbl_persona, tbl_persona.id = tbl_area_persona.id_persona'
+                )
             );
+
+
             $total_informes = $this->Informe_model->total_records($params);
 
             $informes = $this->Informe_model->search_data($params, $start, $this->elementoPorPagina);
@@ -45,6 +55,89 @@ class Informe extends MY_Controller
             redirect(site_url($this->config->item('path_backend')));
         }
     }
+
+
+
+    public function contact()
+    {
+
+        $id = $this->input->post('id', TRUE);
+
+        $data_informe = array(
+            'id' => $id,
+            'enviar_mensaje' => '1'
+        );
+
+
+        if (isset($data_informe)) {
+            try {
+
+
+                $this->Informe_model->update($id, $data_informe);
+
+                $informe = array(
+                  "select" => " tbl_informe.id,tbl_informe.nombre as nombreinforme,tbl_area.nombre as area,tbl_persona.nombre as nombrepersona,tbl_persona.email,tbl_informe.documento,tbl_informe.estado",
+                  "join" => array(
+                      'tbl_area_persona,tbl_area_persona.id = tbl_informe.id_area_persona',
+                      'tbl_area, tbl_area.id = tbl_area_persona.id_area',
+                      'tbl_persona, tbl_persona.id = tbl_area_persona.id_persona'),
+                    "where" => "tbl_informe.id = $id "
+                );
+
+                $informe = $this->Informe_model->get_search_row($informe);
+
+                $archivo = $informe->documento;
+                $url = 'http://localhost/auditoria/' . $archivo;
+
+                $body =  "To reset the password to your Techxee account, click the link below:<br>";
+                // // $body .= "<strong>First Name:</strong><br>" . $informe->first_name . "<br><br>";
+                // $body .= "<strong>Email:</strong><br>" . $informe->email . "<br><br>";
+                $body .= "<strong>Email:</strong><br>" . $url . "<br><br>";
+                $body .= "If you don’t use this link within 3 hours, it will expire.";
+
+                $this->load->library("email");
+                $this->email->clear(TRUE);
+
+                $configuracionGmail = array(
+                    'protocol' => 'smtp',
+                    'smtp_host' => 'ssl://smtp.gmail.com',
+                    'smtp_port' => '465',
+                    'smtp_user' => 'mercedeschiscul18@gmail.com',
+                    'smtp_pass' => 'mercedes2018',
+                    'mailtype' => 'html',
+                    'charset' => 'utf-8',
+                    'newline' => "\r\n"
+                );
+
+
+                $this->email->initialize($configuracionGmail);
+                $this->email->set_newline("\r\n");
+                $this->email->from('mercedeschiscul18@gmail.com', 'Informe - auditoria');
+                $this->email->to('jeanquispe1993@gmail.com');
+                // $this->email->cc('jeanquispe1993@gmail.com');
+                $this->email->subject('New Register');
+                $this->email->subject('New Register');
+                $this->email->attach($url);
+                $this->email->message($body);
+
+                if ($this->email->send()) {
+                    echo "Your email has been sent";
+                } else {
+                    show_error($this->email->print_debugger());
+                }
+            } catch (Exception $exception) {
+                $this->alert("La información no se envio correctamente");
+            }
+        }
+
+
+
+
+        // echo $this->response($resultado);
+
+    }
+
+
 
 
 
@@ -174,54 +267,61 @@ class Informe extends MY_Controller
         if ($this->session->userdata('logged_in') === TRUE) {
 
             if ($this->input->post()) {
-                $id_area = $this->input->post("nombre");
+                $id_area = $this->input->post("area");
+                $nombre = $this->input->post("nombre");
                 $fecha = $this->input->post("fecha");
                 $hora = $this->input->post("hora");
                 $lugar = $this->input->post("lugar");
                 $conformidad = $this->input->post("conformidad");
-                // $normas = $this->input->post("normas");
+                $normas = $this->input->post("normas");
                 $criterios = $this->input->post("criterios");
                 $descripcion = $this->input->post("descripcion");
-                $estado = $this->input->post("estado");
 
 
-                                 $pathImagen = "upload/documento/" . date("Y-m-d");
+                $pathImagen = "upload/documento/" . date("Y-m-d");
 
-                               if (!is_dir($pathImagen))
-                                    mkdir($pathImagen, 0775, true);
-                                if ($_FILES["documento"]["size"] > 0) {
-                                    $nombreArchivoImagen = "documento";
-                                    $formato = substr(strrchr($_FILES["documento"]["name"],'.'),1);
-                                    $nombre_imagen = pathinfo($_FILES['documento']['name'], PATHINFO_FILENAME);
-                                    $nombre_imagen =  $nombre_imagen."_".date("Y-m-d-h-i-s");
-                                    $resultadoFoto = $this->subirArchivo($nombreArchivoImagen, $pathImagen,$nombre_imagen, 'pdf|docx|xlsx', 2024);
-                                    $documento = "";
+                if (!is_dir($pathImagen))
+                    mkdir($pathImagen, 0775, true);
+                if ($_FILES["documento"]["size"] > 0) {
+                    $nombreArchivoImagen = "documento";
+                    $formato = substr(strrchr($_FILES["documento"]["name"], '.'), 1);
+                    $nombre_imagen = pathinfo($_FILES['documento']['name'], PATHINFO_FILENAME);
+                    $nombre_imagen =  $nombre_imagen . "_" . date("Y-m-d-h-i-s");
+                    $resultadoFoto = $this->subirArchivo($nombreArchivoImagen, $pathImagen, $nombre_imagen, 'pdf|docx|xlsx', 23000);
+                    $documento = "";
 
-                                    if (array_key_exists("upload_data", $resultadoFoto)) {
-                                        if (isset($resultadoFoto["upload_data"]["file_name"]))
-                                            $documento = $resultadoFoto["upload_data"]["orig_name"];
-                                            //$foto = base_url() . "files/img/foto_beneficio/" . date("Y-m-d") . '/' . $resultadoFoto["upload_data"]["file_name"];
-                                    } else {
-                                        $this->session->set_flashdata('error', $this->lang->line('error_tamaño_imagen'));
-                                    }
-                                }
 
-                                $documento = $pathImagen."/".$documento;
+                    if (array_key_exists("upload_data", $resultadoFoto)) {
+                        if (isset($resultadoFoto["upload_data"]["file_name"]))
+                            $documento = $resultadoFoto["upload_data"]["orig_name"];
+                        //$foto = base_url() . "files/img/foto_beneficio/" . date("Y-m-d") . '/' . $resultadoFoto["upload_data"]["file_name"];
+                    } else {
+                        $this->session->set_flashdata('error', $this->lang->line('error_tamaño_documento'));
+                    }
+                }
 
+                $documento = $pathImagen . "/" . $documento;
 
 
                 $data = array(
-                    'id_area' => $id_area,
+
+                    'id_area_persona' => $id_area,
+                    'nombre' => $nombre,
                     'documento' => $documento,
                     'fecha' => $fecha,
                     'hora' => $hora,
                     'lugar' => $lugar,
                     'conformidad' => $conformidad,
-                    // 'normas' => $normas,
+                    'normas' => $normas,
                     'criterios' => $criterios,
                     'descripcion' => $descripcion,
-                    'estado' => $estado
+                    'fecha_registro' => date("Y-m-d H:i:s"),
+                    'estado' => 1
+
                 );
+
+
+
 
                 if (isset($data)) {
                     try {
@@ -235,16 +335,21 @@ class Informe extends MY_Controller
             }
 
 
-
             $params = array(
-                            "select" => "*", "where" => "estado = 1"
-                        );
+                "select" => "tbl_area_persona.id,tbl_area_persona.id_area,tbl_area.nombre as area",
+                "join" => array(
+                    'tbl_area, tbl_area_persona.id_area = tbl_area.id'
+                ),
+                "where" => "tbl_area_persona.estado = 1"
 
-            $areas = $this->Area_model->search($params);
+            );
+
+
+            $areas = $this->Area_responsable_model->search($params);
 
 
             $arrayMigaPan = array(
-                array("nombre" => "Producto", "url" => site_url($this->config->item('path_backend') . '/informes')), array("nombre" => "Agregar", 'active' => true)
+                array("nombre" => "Informes", "url" => site_url($this->config->item('path_backend') . '/informes')), array("nombre" => "Agregar", 'active' => true)
             );
 
             $this->arrayVista['arrayMigaPan'] = $arrayMigaPan;
@@ -256,6 +361,8 @@ class Informe extends MY_Controller
             redirect(site_url($this->config->item('path_backend')));
         }
     }
+
+
 
 
     public function editar($id_registro)
@@ -314,7 +421,7 @@ class Informe extends MY_Controller
 
                 if ($this->Producto_model->update($id_registro, $data)) {
 
-                    $this->alert("La información fue actualizada correctamente", site_url($this->config->item('path_backend') . '/productos'));
+                    $this->alert("La información fue actualizada correctamente", site_url($this->config->item('path_backend') . '/informes'));
                 }
             }
 
@@ -331,7 +438,7 @@ class Informe extends MY_Controller
 
             $registro = $this->Producto_model->get_search_row($data);
             $arrayMigaPan = array(
-                array("nombre" => "Producto", "url" => site_url($this->config->item('path_backend') . '/inicio')), array("nombre" => "Editar", 'active' => true)
+                array("nombre" => "Informes", "url" => site_url($this->config->item('path_backend') . '/inicio')), array("nombre" => "Editar", 'active' => true)
             );
 
             $this->arrayVista['arrayMigaPan'] = $arrayMigaPan;
@@ -344,6 +451,29 @@ class Informe extends MY_Controller
             redirect(site_url($this->config->item('path_backend')));
         }
     }
+
+    public function getResponsable($area)
+    {
+
+        $area = urldecode($area);
+
+        if (isset($area) and $area != '') {
+            $parameters = array(
+                "select" => "tbl_persona.id, tbl_persona.nombre as responsable",
+                "join" => ["tbl_area, tbl_area.id_persona = tbl_persona.id"],
+                "where" => "tbl_persona.estado = 1 and tbl_area.id = $area"
+            );
+        }
+
+
+        $responsables = $this->Persona_model->search($parameters);
+        $this->arrayVista['responsables'] = $responsables;
+        $this->arrayVista['vista'] = 'backend/informes/responsables_ajax_view';
+        $this->cargarVistaBackend();
+    }
+
+
+
 
     public function eliminar($id_registro)
     {

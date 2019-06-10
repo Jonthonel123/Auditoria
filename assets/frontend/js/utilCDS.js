@@ -65,7 +65,7 @@ function show_message(type,message) {
 function show_message_title(type,title,message) {
     swal({
         title: title,
-        text: message,
+        text: message, 
         showCancelButton: false,
         confirmButtonColor: '#21A053',
         cancelButtonColor: '#d33',
@@ -81,9 +81,9 @@ function show_message_callback(type,message,callback) {
         text: message,
         type: type,
         showCancelButton: false,
-        confirmButtonColor: '#000',
+        confirmButtonColor: '#fff',
         cancelButtonColor: '#000',
-        confirmButtonText: 'Aceptare',
+        confirmButtonText: 'Aceptar',
         allowOutsideClick: false,
     }).then(function () {
         if (type == "success"){

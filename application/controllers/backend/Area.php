@@ -6,7 +6,7 @@
  * Time: 02:09 PM
  */
 
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 class Area extends MY_Controller
 {
@@ -15,7 +15,6 @@ class Area extends MY_Controller
     {
         parent::__construct();
         $this->load->model("Area_model");
-        $this->load->model("Persona_model");
     }
 
     public function listar($start = 0)
@@ -23,12 +22,9 @@ class Area extends MY_Controller
 
         if ($this->session->userdata('logged_in') === TRUE) {
 
-          $params = array(
-              "select" => "tbl_area.nombre,tbl_area.id_persona,tbl_persona.nombre as responsable,
-               tbl_area.estado",
-              "join" => array('tbl_persona,tbl_area.id_persona = tbl_persona.id')
-          );
-
+            $params = array(
+                "select" => "*"
+            );
 
 
             $total_areas = $this->Area_model->total_records($params);
@@ -37,15 +33,14 @@ class Area extends MY_Controller
             $this->arrayVista['paginador'] = $this->obtenerPaginadoListado(site_url($this->config->item('path_backend') . '/areas'), $total_areas);
 
             $arrayMigaPan = array(
-                array("nombre" => "Areas"), array("nombre" => "Listar", 'active' => true));
+                array("nombre" => "Areas"), array("nombre" => "Listar", 'active' => true)
+            );
 
             $this->arrayVista['arrayMigaPan'] = $arrayMigaPan;
             $this->arrayVista['tituloPagina'] = "Listado de Areas";
             $this->arrayVista['areas'] = $areas;
             $this->arrayVista['vista'] = 'backend/area/listar_view';
             $this->cargarVistaBackend();
-
-
         } else {
             redirect(site_url($this->config->item('path_backend')));
         }
@@ -61,7 +56,7 @@ class Area extends MY_Controller
 
             $where = "";
 
-            if ($nombre != "" ) {
+            if ($nombre != "") {
                 $this->arrayVista['nombre'] = $nombre;
                 if ($where != "") {
                     $where .= " AND tbl_area.nombre LIKE '%" . $nombre . "%' ";
@@ -72,11 +67,11 @@ class Area extends MY_Controller
 
 
 
-              if ($estado != "" ) {
-                  $this->arrayVista['estado'] = $estado;
-                  if ($where != "")
+            if ($estado != "") {
+                $this->arrayVista['estado'] = $estado;
+                if ($where != "")
                     $where .= " AND tbl_area.estado = $estado";
-                  else
+                else
                     $where .= "tbl_area.estado = $estado";
             }
 
@@ -89,9 +84,7 @@ class Area extends MY_Controller
                 );
             } else {
                 $params = array(
-                    "select" => "tbl_area.nombre,tbl_area.id_persona,tbl_persona.nombre as responsable,
-                     tbl_area.estado",
-                    "join" => array('tbl_persona,tbl_area.id_persona = tbl_persona.id'),
+                    "select" => "*",
                     "where" => $where
                 );
             }
@@ -100,7 +93,8 @@ class Area extends MY_Controller
             $areas = $this->Area_model->search_data($params, $start, $this->elementoPorPagina);
 
             $arrayMigaPan = array(
-                array("nombre" => "Area"), array("nombre" => "Listar", 'active' => true));
+                array("nombre" => "Area"), array("nombre" => "Listar", 'active' => true)
+            );
 
             $this->arrayVista['arrayMigaPan'] = $arrayMigaPan;
             $this->arrayVista['paginador'] = $this->obtenerPaginadoListado(site_url($this->config->item('path_backend') . '/Area/buscar'), $total_areas);
@@ -108,8 +102,6 @@ class Area extends MY_Controller
             $this->arrayVista['areas'] = $areas;
             $this->arrayVista['vista'] = 'backend/area/listar_view';
             $this->cargarVistaBackend();
-
-
         } else {
             redirect(site_url($this->config->item('path_backend')));
         }
@@ -120,49 +112,37 @@ class Area extends MY_Controller
         if ($this->session->userdata('logged_in') === TRUE) {
 
             if ($this->input->post()) {
-                $id_responsable = $this->input->post("id_persona");
                 $nombre = $this->input->post("nombre");
                 $estado = $this->input->post("estado");
 
 
                 $data = array(
-                    'id_persona' => $id_responsable,
                     'nombre' => $nombre,
-                    'estado' => $estado
+                    'estado' => $estado,
+                    'fecha_registro' => date("Y-m-d H:i:s")
                 );
 
 
                 if (isset($data)) {
                     try {
 
-                      $this->Area_model->insert($data);
-                      $this->alert("La información se guardó correctamente", site_url($this->config->item('path_backend') . '/inicio'));
-
+                        $this->Area_model->insert($data);
+                        $this->alert("La información se guardó correctamente", site_url($this->config->item('path_backend') . '/area'));
                     } catch (Exception $exception) {
-                      $this->alert("Ocurrió un error al guardar");
+                        $this->alert("Ocurrió un error al guardar");
                     }
                 }
-
             }
 
 
-
-           $responsables = array(
-                            "select" => "*", "where" => "estado = 1"
-                          );
-
-          $responsables = $this->Persona_model->search($responsables);
-
             $arrayMigaPan = array(
-                array("nombre" => "Area", "url" => site_url($this->config->item('path_backend') . '/inicio')), array("nombre" => "Agregar", 'active' => true));
+                array("nombre" => "Area", "url" => site_url($this->config->item('path_backend') . '/area')), array("nombre" => "Agregar", 'active' => true)
+            );
 
             $this->arrayVista['arrayMigaPan'] = $arrayMigaPan;
             $this->arrayVista['tituloPagina'] = "Agregar Area";
-            $this->arrayVista['responsables'] = $responsables;
             $this->arrayVista['vista'] = 'backend/area/agregar_view';
             $this->cargarVistaBackend();
-
-
         } else {
             redirect(site_url($this->config->item('path_backend')));
         }
@@ -177,18 +157,16 @@ class Area extends MY_Controller
                 $nombre = $this->input->post("nombre");
                 $estado = $this->input->post("estado");
 
-
-
                 $area = array(
                     'nombre' => $nombre,
-                    'estado' => $estado
+                    'estado' => $estado,
+                    'fecha_modificacion' => date("Y-m-d H:i:s")
                 );
 
                 if ($this->Area_model->update($id_area, $area)) {
 
                     $this->alert("La información fue actualizada correctamente", site_url($this->config->item('path_backend') . '/inicio'));
                 }
-
             }
 
             $data = array(
@@ -201,15 +179,14 @@ class Area extends MY_Controller
 
             $area = $this->Area_model->get_search_row($data);
             $arrayMigaPan = array(
-                array("nombre" => "Area", "url" => site_url($this->config->item('path_backend') . '/inicio')), array("nombre" => "Editar", 'active' => true));
+                array("nombre" => "Area", "url" => site_url($this->config->item('path_backend') . '/inicio')), array("nombre" => "Editar", 'active' => true)
+            );
 
             $this->arrayVista['arrayMigaPan'] = $arrayMigaPan;
             $this->arrayVista['tituloPagina'] = "Editar Area";
             $this->arrayVista['area'] = $area;
             $this->arrayVista['vista'] = 'backend/area/editar_view';
             $this->cargarVistaBackend();
-
-
         } else {
             redirect(site_url($this->config->item('path_backend')));
         }
@@ -226,7 +203,7 @@ class Area extends MY_Controller
             $where = "";
 
 
-            if ($nombre != "" ) {
+            if ($nombre != "") {
 
                 $this->arrayVista['nombre'] = $nombre;
                 if ($where != "") {
@@ -236,7 +213,7 @@ class Area extends MY_Controller
                 }
             }
 
-            if ($tipo != "" ) {
+            if ($tipo != "") {
 
                 $this->arrayVista['departamentoSeleccionado'] = $tipo;
                 if ($where != "") {
@@ -266,9 +243,9 @@ class Area extends MY_Controller
             foreach ($registrados as $registro) {
 
                 array_push($data, array(
-                    utf8_decode("Nombre") => isset($registro->nombre)?utf8_decode($registro->nombre):"-",
-                    utf8_decode("Tipo") => isset($registro->tipo)? (($registro->tipo == 1)? "Escolar":"Oficina") :"-",
-                    utf8_decode("Estado") => isset($registro->estado)? (($registro->estado == 1)? "Activo":"Inactivo") :"-"
+                    utf8_decode("Nombre") => isset($registro->nombre) ? utf8_decode($registro->nombre) : "-",
+                    utf8_decode("Tipo") => isset($registro->tipo) ? (($registro->tipo == 1) ? "Escolar" : "Oficina") : "-",
+                    utf8_decode("Estado") => isset($registro->estado) ? (($registro->estado == 1) ? "Activo" : "Inactivo") : "-"
                 ));
             }
 
@@ -276,19 +253,19 @@ class Area extends MY_Controller
             {
                 $str = preg_replace("/\t/", "\\t", $str);
                 $str = preg_replace("/\r?\n/", "\\n", $str);
-                if(strstr($str, '"')) $str = '"' . str_replace('"', '""', $str) . '"';
+                if (strstr($str, '"')) $str = '"' . str_replace('"', '""', $str) . '"';
             }
 
-            $fileName = "areas-". date('YmdHis') . ".xls";
+            $fileName = "areas-" . date('YmdHis') . ".xls";
 
             header("Content-Disposition: attachment; filename=\"$fileName\"");
             header("Content-Type: application/vnd.ms-excel, charset=utf-8");
 
             $flag = false;
 
-            foreach($data as $row) {
+            foreach ($data as $row) {
                 // print_r( array_values($row))."<br>";
-                if(!$flag) {
+                if (!$flag) {
 
                     echo implode("\t", array_keys($row)) . "\n";
                     $flag = true;
@@ -299,7 +276,6 @@ class Area extends MY_Controller
             }
 
             exit;
-
         } else {
             redirect(site_url($this->config->item('path_backend')));
         }

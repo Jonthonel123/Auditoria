@@ -5,17 +5,15 @@
             <div class="panel-body">
                 <div class="panel-body">
 
-                    <form name="form_busqueda" id="form_busqueda" method="post"
-                          action="<?php
-                          echo site_url($this->config->item('path_backend') . '/Area/buscar');
-                          ?>">
+                    <form name="form_busqueda" id="form_busqueda" method="post" action="<?php
+                                                                                        echo site_url($this->config->item('path_backend') . '/Area/buscar');
+                                                                                        ?>">
 
                         <div class="col-md-12 form-group">
 
                             <div class="col-md-6">
                                 <label class="control-label"> Nombre</label>
-                                <input id="nombre" maxlength="255" class="form-control input" type="text" name="nombre"
-                                       placeholder="Nombre" value="<?php echo $nombre; ?>" class="input-small"/>
+                                <input id="nombre" maxlength="255" class="form-control input" type="text" name="nombre" placeholder="Nombre" value="<?php echo $nombre; ?>" class="input-small" />
                             </div>
 
                             <div class="col-md-6">
@@ -30,7 +28,7 @@
                         </div>
 
                         <div class="col-md-12 form-group">
-                            <input type="hidden" name="buscar" id="buscar" value=""/>
+                            <input type="hidden" name="buscar" id="buscar" value="" />
                         </div>
 
                         <div class="col-md-12 form-group">
@@ -38,7 +36,7 @@
 
                             </div>
                             <div class="col-md-8">
-                                <input type="submit" class="btn btn-primary pull-right" value="Buscar"/>
+                                <input type="submit" class="btn btn-primary pull-right" value="Buscar" />
                             </div>
                         </div>
                     </form>
@@ -50,52 +48,45 @@
     <div class="panel panel-default" style="border-top-color: #DAD4D4 ; border-top-width : 2px">
         <div class="panel-heading">
             <h3 class="panel-title">Listado</h3>
-            <a href="<?php echo site_url($this->config->item('path_backend') . '/Area/agregar'); ?>"
-                 class="btn btn-default pull-right"><i class="fa fa-plus"></i> Agregar</a>
+            <a href="<?php echo site_url($this->config->item('path_backend') . '/Area/agregar'); ?>" class="btn btn-default pull-right"><i class="fa fa-plus"></i> Agregar</a>
 
         </div>
         <div class="panel-body">
             <table class="table table-hover table-cms">
                 <thead>
-                <tr>
-                    <td colspan="4" align="center" valign="top"></td>
-                </tr>
-                <tr>
-                    <th>Area</th>
-                    <th>Responsable</th>
-                    <th>Estado</th>
-                    <th>Acciones</th>
-                </tr>
+                    <tr>
+                        <td colspan="4" align="center" valign="top"></td>
+                    </tr>
+                    <tr>
+                        <th>Area</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
                 </thead>
                 <tbody>
 
-                <?php
-                if (isset($areas) && count($areas) > 0)
-                {
+                    <?php
+                    if (isset($areas) && count($areas) > 0) {
 
-                    foreach ($areas as $item)
-                    {
-                        ?>
-                        <tr>
-                            <td><?php echo $item->nombre; ?></td>
-                            <td><?php echo $item->responsable; ?></td>
+                        foreach ($areas as $item) {
+                            ?>
+                            <tr>
+                                <td><?php echo $item->nombre; ?></td>
+                                <td style="text-align:center;">
+                                    <?php
+                                    if ($item->estado == 1) echo '<span class="label label-success label-form" style="width:70px; font-weight:bolder;">Activo</span>';
+                                    else
+                                        echo '<span class="label label-danger label-form" style="width:70px; font-weight:bolder;">Inactivo</span>'
+                                        ?>
+                                </td>
 
-                            <td style="text-align:center;">
-                                <?php
-                                if ($item->estado == 1) echo '<span class="label label-success label-form" style="width:70px; font-weight:bolder;">Activo</span>'; else
-                                    echo '<span class="label label-danger label-form" style="width:70px; font-weight:bolder;">Inactivo</span>'
-                                ?>
-                            </td>
+                                <td>
+                                    <a href="<?php echo site_url($this->config->item('path_backend') . '/Area/editar/' . $item->id); ?>" class="btn btn-info btn-condensed" title="Editar"><i class="fa fa-edit"></i></a>
+                                </td>
 
-                            <td>
-                              <a href="<?php echo site_url($this->config->item('path_backend') . '/Area/editar/' . $item->id); ?>"
-                                 class="btn btn-info btn-condensed" title="Editar"><i class="fa fa-edit"></i></a>
-                            </td>
-
-                        </tr>
+                            </tr>
                         <?php
                     }
-
                 }
                 ?>
 
@@ -111,8 +102,8 @@
 </div>
 
 <script type="text/javascript">
-    jQuery(document).ready(function () {
-        jQuery(document).on('click', '#paginador ul li a', function (c) {
+    jQuery(document).ready(function() {
+        jQuery(document).on('click', '#paginador ul li a', function(c) {
             c.preventDefault();
             var inicio = jQuery(this).attr('href');
             jQuery("#form_busqueda").attr("action", inicio);
@@ -132,7 +123,6 @@
         format: 'YYYY-MM-DD',
         locale: 'es'
     });
-
 </script>
 
 

@@ -128,6 +128,7 @@ class MY_Controller extends CI_Controller
     {
 
         $config['upload_path'] = $path_file;
+
         $config['allowed_types'] = '*';
         $config['encrypt_name'] = false;
        if ($file_name != ""){

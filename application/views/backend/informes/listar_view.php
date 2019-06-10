@@ -58,7 +58,10 @@
                         <td colspan="4" align="center" valign="top"></td>
                     </tr>
                     <tr>
+                        <th>Informe</th>
                         <th>Area</th>
+                        <th>Responsable</th>
+                        <th>Email</th>
                         <th>Lugar</th>
                         <th>Documento</th>
                         <th>Estado</th>
@@ -67,9 +70,9 @@
                 </thead>
                 <tbody>
 
-    <?php
-$url = 'http://localhost/auditoria/';
-     ?>
+                    <?php
+                    $url = 'http://localhost/auditoria/';
+                    ?>
 
                     <?php
                     if (isset($informes) && count($informes) > 0) {
@@ -77,17 +80,23 @@ $url = 'http://localhost/auditoria/';
                         foreach ($informes as $item) {
                             ?>
                             <tr>
-                                <td><?php echo $item->nombre; ?></td>
+                                <td><?php echo $item->nombreinforme; ?></td>
+                                <td><?php echo $item->area; ?></td>
+                                <td><?php echo $item->nombrepersona; ?></td>
+                                <td><?php echo $item->email; ?></td>
                                 <td><?php echo $item->lugar; ?></td>
-                                <td><a href="<?php echo $url.$item->documento; ?>" target="_blank">Ver Documento</a></td>
+                              
+                                <td><a href="<?php echo $url . $item->documento; ?>" target="_blank">Ver Documento</a></td>
                                 <td style="text-align:center;">
                                     <?php
-                                    if ($item->estado == 1) echo '<span class="label label-success label-form" style="width:70px; font-weight:bolder;">Activo</span>'; else
+                                    if ($item->estado == 1) echo '<span class="label label-success label-form" style="width:70px; font-weight:bolder;">Activo</span>';
+                                    else
                                         echo '<span class="label label-danger label-form" style="width:70px; font-weight:bolder;">Inactivo</span>'
-                                    ?>
+                                        ?>
                                 </td>
 
                                 <td>
+                                    <a id="restore_password" href="javascript:enviarcorreo('<?php echo $item->id; ?>')" class="btn btn-warning btn-condensed" title="View"><i class="fas fa fa-envelope"></i></a>
                                     <a href="<?php echo site_url($this->config->item('path_backend') . '/Categoria/editar/' . $item->id); ?>" class="btn btn-info btn-condensed" title="Editar"><i class="fa fa-edit"></i></a>
                                 </td>
 
@@ -108,6 +117,70 @@ $url = 'http://localhost/auditoria/';
     </div>
 </div>
 
+
+<script type="text/javascript">
+    function enviarcorreo(id) {
+
+        var url = "<?php echo site_url($this->config->item('path_backend') . '/Informe/contact'); ?>";
+
+        Swal.fire({
+            title: 'Desea enviar su mensaje ahora?',
+            text: "Eliga una opcion!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Enviar',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.value) {
+
+                $.post(url, {
+                    id: id
+                });
+
+                Swal.fire(
+                    'Enviado!',
+                    'Se envio el mensaje',
+                    'success'
+                )
+            }
+        })
+
+
+    }
+</script>
+
+
+<script type="text/javascript">
+    $(function () {
+        var fileName = "Mudassar_Khan.pdf";
+        $("#btnShow").click(function () {
+            $("#dialog").dialog({
+                modal: true,
+                title: fileName,
+                width: 540,
+                height: 450,
+                buttons: {
+                    Close: function () {
+                        $(this).dialog('close');
+                    }
+                },
+                open: function () {
+                    var object = "<object data=\"{FileName}\" type=\"application/pdf\" width=\"500px\" height=\"300px\">";
+                    object += "If you are unable to view file, you can download from <a href=\"{FileName}\">here</a>";
+                    object += " or download <a target = \"_blank\" href = \"http://get.adobe.com/reader/\">Adobe PDF Reader</a> to view the file.";
+                    object += "</object>";
+                    object = object.replace(/{FileName}/g, "Files/" + fileName);
+                    $("#dialog").html(object);
+                }
+            });
+        });
+    });
+</script>
+
+
+<!--
 <script type="text/javascript">
     jQuery(document).ready(function() {
         jQuery(document).on('click', '#paginador ul li a', function(c) {
@@ -140,7 +213,7 @@ $url = 'http://localhost/auditoria/';
         format: 'YYYY-MM-DD',
         locale: 'es'
     });
-</script>
+</script> -->
 
 
 <!-- END PAGE CONTENT WRAPPER -->

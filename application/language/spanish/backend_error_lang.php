@@ -16,6 +16,7 @@ $lang['error_local_promocion_eliminar'] = 'Error al quitar el  local';
 $lang['error_promocion_agregar'] = 'Error al agregar promoción';
 $lang['error_usuario_agregar'] = 'Error al agregar usuario';
 $lang['error_tamaño_imagen'] = 'Imagen no válida, verifica que el peso máximo sea de 1 MB y tenga el formato correcto (*.jpg, *.png)';
+$lang['error_tamaño_documento'] = 'Documento no válido, verifica que el peso máximo sea de 2 MB y tenga el formato correcto (*.pdf, *.xlsx, *.docx)';
 $lang['error_password'] = 'Password Incorrecto';
 $lang['error_portada_agregar'] = 'Error al agregar portada';
 $lang['error_usuario'] = 'Este usuario está desactivado.';

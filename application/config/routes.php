@@ -65,7 +65,7 @@ $route['productos-oficina'] = 'frontend/Productos/oficina';
 
 
 ################### BACKEND  Area #############################
-$route[$this->config->item('path_backend') . '/inicio'] = "backend/Area/listar";
+// $route[$this->config->item('path_backend') . '/inicio'] = "backend/Area/listar";
 $route[$this->config->item('path_backend') . '/areas'] = "backend/Area/listar";
 $route[$this->config->item('path_backend') . '/areas/(:num)'] = "backend/Area/listar/$1";
 $route[$this->config->item('path_backend') . '/areas/buscar'] = "backend/Area/buscar";
@@ -75,13 +75,16 @@ $route[$this->config->item('path_backend') . '/areas/export'] = "backend/Area/ex
 $route[$this->config->item('path_backend')] = "backend/inicio/index";
 
 
-$route[$this->config->item('path_backend') . '/productos'] = "backend/Productos/listar";
-$route[$this->config->item('path_backend') . '/productos/(:num)'] = "backend/Productos/listar/$1";
-$route[$this->config->item('path_backend') . '/productos/buscar'] = "backend/Productos/buscar";
-$route[$this->config->item('path_backend') . '/productos/buscar/(:num)'] = "backend/Productos/buscar/$1";
-$route[$this->config->item('path_backend') . '/productos/eliminar/(:num)'] = "backend/Productos/eliminar/$1";
-$route[$this->config->item('path_backend') . '/productos/send/(:num)'] = "backend/Productos/send/$1";
-$route[$this->config->item('path_backend') . '/productos/export'] = "backend/Productos/export";
+#area_responsables
+$route[$this->config->item('path_backend') . '/area_responsables'] = "backend/Area_Responsable/listar";
+$route[$this->config->item('path_backend') . '/area_responsables/(:num)'] = "backend/Area_Responsable/listar/$1";
+$route[$this->config->item('path_backend') . '/area_responsables/buscar'] = "backend/Area_Responsable/buscar";
+$route[$this->config->item('path_backend') . '/area_responsables/buscar/(:num)'] = "backend/Area_Responsable/buscar/$1";
+$route[$this->config->item('path_backend') . '/area_responsables/eliminar/(:num)'] = "backend/Area_Responsable/eliminar/$1";
+$route[$this->config->item('path_backend') . '/area_responsables/send/(:num)'] = "backend/Area_Responsable/send/$1";
+$route[$this->config->item('path_backend') . '/area_responsables/export'] = "backend/Area_Responsable/export";
+$route[$this->config->item('path_backend') . '/informes/responsable/(:num)'] = "backend/Area_Responsable/getResponsable/$1";
+
 
 
 $route[$this->config->item('path_backend') . '/informes'] = "backend/Informe/listar";
@@ -91,6 +94,7 @@ $route[$this->config->item('path_backend') . '/informes/buscar/(:num)'] = "backe
 $route[$this->config->item('path_backend') . '/informes/eliminar/(:num)'] = "backend/Informe/eliminar/$1";
 $route[$this->config->item('path_backend') . '/informes/send/(:num)'] = "backend/Informe/send/$1";
 $route[$this->config->item('path_backend') . '/informes/export'] = "backend/Informe/export";
+$route[$this->config->item('path_backend') . '/informes/responsable/(:num)'] = "backend/Informe/getResponsable/$1";
 
 
 
