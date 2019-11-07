@@ -77,8 +77,51 @@
    </div>
 </section>
 
+<!--Seccion Servicios -->
+<section class="servicios" id="servicios" >
+    <div class="container-fluid ">
+           
+         <h2 class="d-flex justify-content-center  " data-aos="fade-up"
+                    data-aos-duration="2000" >SERVICIOS</h2>
 
-<section id="galeria" class="galeria mt-5 mb-5"  >
+        <div class="row d-flex justify-content-center " class="text-center" data-aos="fade-up"
+                    data-aos-duration="2000">
+            
+            <div class="C1 col-md-6 equipo-img d-flex card-deck btn  justify-content-center hover-spin " data-aos="zoom-in" data-aos-duration="2000">
+                <div class="card">
+                        <img src="assets/frontend/images/paginasweb.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Paginas Web</h5>
+                            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            <div class="C2 col-md-6 card  justify-content-center " data-aos="zoom-in" data-aos-duration="2000" >
+                        <img src="assets/frontend/images/aplicaciones.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Aplicativos Moviles</h5>
+                        <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+        </div>
+            <div class="C3 col-md-6 card  justify-content-center " data-aos="zoom-in" data-aos-duration="2000">
+                        <img src="assets/frontend/images/solucionesTI.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Soluciones de TI</h5>
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+  </div>
+</div>
+        </div>
+
+    </div>
+</section>
+
+
+
+
+<section id="galeria " class="galeria mt-5 mb-5 bg-light"  >
 
    <div class="container" >
        <div class="row">
@@ -188,7 +231,7 @@
 </div>
 </section>
 
-<div class="container-fluid contacto  bg-light" >
+<div class="container-fluid contacto " >
    <section class="contactanos" id="contacto">
 
        <h2 class="title" data-aos="fade-up"
@@ -228,7 +271,7 @@
 </div>
 
 <!-- Seccion carousel logos     -->
-<div class="container">
+<div class="container ">
    <h2 class="text-center pt-4 pb-4 " >NUESTROS CERTIFICADOS</h2>
    <section class="customer-logos pb-4">
        <div class="slide"><img src="https://www.solodev.com/assets/carousel/image1.png"></div>

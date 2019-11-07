@@ -61,7 +61,7 @@
 
      <div class="row bottom-footer ">
        <div class="col ">
-<p class="small">2019 - Desarrollado por Teccyber</p>
+          <p class="small">2019 - Desarrollado por Teccyber</p>
        </div>
      </div>
 

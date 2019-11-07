@@ -15,10 +15,15 @@
       <li class="nav-item">
         <a class="nav-link js-scroll-trigger" href="#nosotros">Nosotros</a>
       </li>
+
+      <li class="nav-item">
+        <a class="nav-link js-scroll-trigger" href="#servicio">Servicios</a>
+      </li>
  
       <li class="nav-item">
         <a class="nav-link js-scroll-trigger" href="#galeria">Galeria</a>
       </li>
+
 
       <li class="nav-item">
         <a class="nav-link js-scroll-trigger" href="#contacto">Contactanos</a>
